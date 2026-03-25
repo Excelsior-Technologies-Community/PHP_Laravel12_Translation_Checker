@@ -1,59 +1,463 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# PHP_Laravel12_Translation_Checker
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
 
-## About Laravel
+A Laravel 12 project designed to check missing translation files and keys in multilingual applications.
+It provides both CLI output and a dark-themed HTML report, making it easy to maintain translations for multiple languages.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Project Description
 
-## Learning Laravel
+Maintaining translations in Laravel applications can be challenging, especially when working with multiple languages.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+This project helps developers to:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Identify missing translation files in different languages.
+- Identify missing translation keys within existing files.
+- Generate a detailed summary in CLI or HTML report.
+- Quickly ensure translations are consistent across all supported languages.
 
-## Laravel Sponsors
+This tool is particularly useful in multilingual Laravel applications where new translations are frequently added.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## Features
 
-## Contributing
+- Check for missing translation files per language.
+- Check for missing keys within existing translation files.
+- CLI output with summary.
+- Dark-themed HTML report for visual inspection.
+- Supports custom directories for language files.
+- Lightweight, no additional database setup required.
+- Easy to extend for additional languages.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Technologies Used
 
-## Security Vulnerabilities
+- Laravel 12 – PHP framework.
+- PHP 8.1+ – Core programming language.
+- Composer – Dependency management.
+- Blade & HTML/CSS – For HTML report generation.
+- Laravel Artisan Commands – For CLI execution.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+
+
+## Installation Steps
+
+
+---
+
+
+## STEP 1: Create Laravel 12 Project
+
+### Open terminal / CMD and run:
+
+```
+composer create-project laravel/laravel PHP_Laravel12_Translation_Checker "12.*"
+
+```
+
+### Go inside project:
+
+```
+cd PHP_Laravel12_Translation_Checker
+
+```
+
+#### Explanation:
+
+Installs a fresh Laravel 12 application and moves into the project folder.
+
+
+
+
+## STEP 2: Database Setup (Optional)
+
+### Update database details:
+
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel12_Translation_Checker
+DB_USERNAME=root
+DB_PASSWORD=
+
+```
+
+### Create database in MySQL / phpMyAdmin:
+
+```
+Database name: laravel12_Translation_Checker
+
+```
+
+### Then Run:
+
+```
+php artisan migrate
+
+```
+
+
+#### Explanation:
+
+Connects Laravel to MySQL and creates default tables; optional for this project since translation checker doesn't need a database.
+
+
+
+
+## STEP 3: Install the package
+
+### Run:
+
+```
+composer require --dev larswiegers/laravel-translations-checker
+
+```
+
+#### Explanation:
+
+Installs the official Laravel translations checker package for development use.
+
+
+
+
+## STEP 4: Create Sample Language Files
+
+### Create:
+
+```
+├── resources/
+│   └── lang/
+│       ├── en/
+│       │   ├── auth.php
+│       │   └── messages.php
+│       └── fr/
+│           └── auth.php
+
+```
+
+
+### resources/lang/en/auth.php
+
+```
+<?php
+return [
+    'failed' => 'Login failed',
+    'password' => 'Wrong password',
+];
+
+```
+
+
+
+### resources/lang/en/messages.php
+
+```
+<?php
+return [
+    'welcome' => 'Welcome',
+    'bye' => 'Goodbye',
+];
+
+```
+
+### resources/lang/fr/auth.php
+
+```
+<?php
+return [
+    'failed' => 'Échec de connexion',
+];
+
+```
+
+#### Explanation:
+
+Sets up English and French translations with some missing keys/files for testing.
+
+
+
+
+## STEP 5: Create Artisan Command
+
+### Run: 
+
+```
+php artisan make:command TranslationCheckCommand
+
+```
+
+
+### app/Console/Commands/TranslationCheckCommand.php
+
+```
+<?php
+
+namespace App\Console\Commands;
+
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\File;
+
+class TranslationCheckCommand extends Command
+{
+    protected $signature = 'translations:check 
+                            {--directory=resources/lang} 
+                            {--report=cli}'; // cli or html
+
+    protected $description = 'Check missing translation files and keys';
+
+    private $errors = [
+        'files' => [],
+        'keys' => [],
+    ];
+
+    public function handle()
+    {
+        $langPath = base_path($this->option('directory'));
+
+        if (!File::exists($langPath)) {
+            $this->error("Directory not found: $langPath");
+            return;
+        }
+
+        $languages = File::directories($langPath);
+        $langs = array_map(fn($p) => basename($p), $languages);
+
+        if (empty($langs)) {
+            $this->error("No languages found in $langPath");
+            return;
+        }
+
+        $referenceLang = $languages[0];
+        $files = File::files($referenceLang);
+
+        foreach ($langs as $lang) {
+            $this->line("\nChecking Language: $lang");
+            $this->line(str_repeat('-', 25));
+
+            foreach ($files as $file) {
+                $fileName = $file->getFilename();
+                $filePath = "$langPath/$lang/$fileName";
+
+                // Check file exists
+                if (!File::exists($filePath)) {
+                    $this->warn("Missing File: $lang/$fileName");
+                    $this->errors['files'][] = "$lang/$fileName";
+                    continue;
+                }
+
+                $referenceData = include $file->getPathname();
+                $langData = include $filePath;
+
+                if (!is_array($referenceData) || !is_array($langData)) {
+                    continue;
+                }
+
+                $this->checkKeys($referenceData, $langData, $lang, $fileName);
+            }
+        }
+
+        $this->line("\n------------------------");
+        $this->line("Summary:");
+        $this->line("Languages checked: " . count($langs));
+        $this->line("Missing files: " . count($this->errors['files']));
+        $this->line("Missing keys: " . count($this->errors['keys']));
+        $this->line("------------------------\n");
+
+        if ($this->option('report') === 'html') {
+            $this->generateHtmlReport();
+        }
+    }
+
+    private function checkKeys($reference, $target, $lang, $fileName, $prefix = '')
+    {
+        if (!is_array($reference) || !is_array($target))
+            return;
+
+        foreach ($reference as $key => $value) {
+            $fullKey = $prefix ? "$prefix.$key" : $key;
+
+            if (!array_key_exists($key, $target)) {
+                $this->error("Missing Key: $lang.$fileName.$fullKey");
+                $this->errors['keys'][] = "$lang.$fileName.$fullKey";
+            } elseif (is_array($value)) {
+                $this->checkKeys($value, $target[$key], $lang, $fileName, $fullKey);
+            }
+        }
+    }
+
+    private function generateHtmlReport()
+    {
+        $html = '<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Translation Checker Report</title>
+<style>
+body { font-family: Arial, sans-serif; background:#0f172a; color:#fff; padding:20px; }
+h1 { color:#facc15; }
+.language { margin-top:20px; }
+.file { margin-left:20px; margin-top:10px; }
+.card { background:#1e293b; padding:10px; border-radius:8px; margin:5px 0; }
+.error { color:#f87171; }
+.warn { color:#facc15; }
+.success { color:#4ade80; }
+summary { cursor:pointer; font-weight:bold; }
+</style>
+</head>
+<body>
+<h1>Translation Checker Report</h1>';
+
+        $languages = [];
+
+        foreach ($this->errors['files'] as $file) {
+            [$lang, $fileName] = explode('/', $file, 2);
+            $languages[$lang]['files'][] = $fileName;
+        }
+
+        foreach ($this->errors['keys'] as $key) {
+            [$lang, $rest] = explode('.', $key, 2);
+            $languages[$lang]['keys'][] = $rest;
+        }
+
+        if (empty($languages)) {
+            $html .= '<div class="card success">No missing files or keys found! ✅</div>';
+        } else {
+            foreach ($languages as $lang => $data) {
+                $html .= '<div class="language"><h2>Language: ' . $lang . '</h2>';
+
+                if (!empty($data['files'])) {
+                    $html .= '<details open><summary>Missing Files (' . count($data['files']) . ')</summary>';
+                    foreach ($data['files'] as $file) {
+                        $html .= '<div class="card warn">' . $file . '</div>';
+                    }
+                    $html .= '</details>';
+                }
+
+                if (!empty($data['keys'])) {
+                    $html .= '<details open><summary>Missing Keys (' . count($data['keys']) . ')</summary>';
+                    foreach ($data['keys'] as $key) {
+                        $html .= '<div class="card error">' . $key . '</div>';
+                    }
+                    $html .= '</details>';
+                }
+
+                $html .= '</div>';
+            }
+        }
+
+        $html .= '</body></html>';
+
+        $file = base_path('translation_report.html');
+        file_put_contents($file, $html);
+
+        $this->info("\nHTML report generated at: $file");
+    }
+}
+
+```
+
+#### Explanation:
+
+Creates a custom CLI command where we will implement the translation checker logic.
+
+
+
+
+## STEP 6: Run Command
+
+### CLI output:
+
+```
+php artisan translations:check
+
+```
+
+#### Expected Output:
+
+
+<img src="screenshots/Screenshot 2026-03-25 131335.png" width="900">
+
+
+#### Explanation:
+
+Runs the checker in the terminal and shows missing files and keys.
+
+
+
+
+### HTML report:
+
+```
+php artisan translations:check --report=html
+
+```
+
+#### Expected Output:
+
+
+<img src="screenshots/Screenshot 2026-03-25 131358.png" width="900">
+
+
+#### Explanation:
+
+Generates a dark-themed HTML report with missing files and keys.
+
+
+
+### Custom Directory:
+
+```
+php artisan translations:check --directory=resources/lang
+
+```
+
+#### Expected Output:
+
+
+<img src="screenshots/Screenshot 2026-03-25 132412.png" width="900">
+
+
+#### Explanation:
+
+Allows checking translations in a custom folder instead of default resources/lang.
+
+
+
+---
+
+
+## Project Folder Structure:
+
+```
+PHP_Laravel12_Translation_Checker/
+│
+├── app/
+│   └── Console/
+│       └── Commands/
+│           └── TranslationCheckCommand.php   <-- Custom CLI command
+│
+├── resources/
+│   └── lang/
+│       ├── en/
+│       │   ├── auth.php
+│       │   └── messages.php
+│       └── fr/
+│           └── auth.php
+│
+├── vendor/                                 <-- Composer packages
+│
+├── artisan                                  <-- Laravel CLI
+├── composer.json
+├── composer.lock
+├── .env                                     <-- Environment config
+├── README.md
+└── translation_report.html                  <-- Generated HTML report
+
+```
